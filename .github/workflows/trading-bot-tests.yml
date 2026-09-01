@@ -1,0 +1,16 @@
+name: trading-bot-tests
+on:
+  push:
+    branches: [eurusd-survival-bot-v2]
+  pull_request:
+    branches: [main]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r trading_bot/requirements.txt pytest
+      - run: pytest trading_bot/test_core.py -q
